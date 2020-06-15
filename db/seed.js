@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const faker = require('faker')
 const User = require('../models/user')
-const dbURI = 'mongodb://localhost/spotme-db'
+const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/spotme-db'
 const defaultProfiles = require('./data/users')
 
 
