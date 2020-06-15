@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import ProfileEdit from './ProfileEdit'
+import EditProfile from './EditProfile'
 import { Link } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -106,7 +106,7 @@ class ProfileInfo extends React.Component {
               </div>
               <p> {user.description ? user.description : ' '}</p>
             </div>
-            <ProfileEdit 
+            <EditProfile 
                 {...user}
                 handleEdit={this.props.handleEdit}
                 toggleModal={this.toggleModal}
