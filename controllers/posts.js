@@ -118,7 +118,7 @@ async function removeComment(req,res,next){
     const owner = await User.findById(req.params.ownerId)
     const post = owner.posts.id(req.params.postId)
     const commentToDelete = post.comments.id(req.params.commentId)
-    if (!owner || !post || !commentToDelete) {
+    if ( !owner || !post || !commentToDelete) {
       throw new Error('Not Found')
     }
     

@@ -32,8 +32,6 @@ class EditProfile extends React.Component {
     }
   }
 
-
-
   handleChange = event => {
     const user = { ...this.state.user, [event.target.name]: event.target.value }
     this.setState({ user })

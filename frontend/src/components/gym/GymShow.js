@@ -7,8 +7,6 @@ import Reviews from './gymSections/Reviews'
 import GymNav from './gymSections/GymNav'
 import GymInfo from './gymSections/GymInfo'
 
-
-
 class gymShow extends React.Component {
   state={
 
@@ -56,20 +54,17 @@ class gymShow extends React.Component {
 
   getSection = async page =>  {
     const section = { reviews: false, members: false, info: false, posts: false }
-    await this.setState({ section })
+    this.setState({ section })
     const sectionChange =  { ...this.state.section, [page]: true }
     this.setState({ section: sectionChange })
   }
 
   render() { 
     const baseUrl = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='
-    const key = '&key=AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A'
-
+    const key = process.env.REACT_APP_GOOGLE_API_KEY
     return (  
       <div className='gym-show-page'> 
         <div className='page-top'>
-
-
 
       <div className='gym-images'>
         <div className='slider-container'>
@@ -82,7 +77,7 @@ class gymShow extends React.Component {
             speeds={500}>
               {this.state.photoReferences.map(photo => {
                 return <div className='slide'>
-                  <img  alt='gym-pics' className='gym-img' src={`${baseUrl}${photo}${key}`}/></div> 
+                  <img  alt='gym-pics' className='gym-img' src={`${baseUrl}${photo}&key=${key}`}/></div> 
                 })}
           </Slider>
             <div className='slider-two'>
@@ -95,7 +90,7 @@ class gymShow extends React.Component {
             className='slides-two'> 
               {this.state.photoReferences.map(photo => {
                 return <div className='slide-two'>
-                <img alt='gym-pics'className='slider-two-img' src={`${baseUrl}${photo}${key}`}/> 
+                <img alt='gym-pics'className='slider-two-img' src={`${baseUrl}${photo}&key=${key}`}/> 
                 </div> 
               })}
           </Slider>

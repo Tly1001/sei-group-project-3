@@ -14,7 +14,7 @@ import { notify } from '../../lib/notifications'
 
 class Profile extends React.Component {
 state = {
-  user: {}, 
+  user: {},
   data: {
     content: ''
   },
@@ -23,14 +23,18 @@ state = {
 currentUser : {}
 }
 
-async componentDidMount() {
+getData = async () => {
   const userId = this.props.match.params.userId
   const res = await getProfile(userId)
-  const getCurrentId = await getUserId()
-  const currentUser = await getProfile(getCurrentId)
-  await this.setState( { user: res.data, currentUser : currentUser.data  }) 
-  this.getData()
+  this.setState( { user: res.data })
+}
+
+async componentDidMount() {
   try {
+    this.getData()
+    const getCurrentId = await getUserId()
+    const currentUser = await getProfile(getCurrentId)
+    this.setState( { currentUser : currentUser.data  })
   } catch (err) {
     console.log(err)
   }
@@ -40,23 +44,15 @@ componentDidUpdate = async (prevProps) => {
   if (prevProps.location.pathname.includes('/profile/') && this.props.location.pathname.includes('/profile/')) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       try {
-        const userId = this.props.match.params.userId
-        const res = await getProfile(userId)
         const getCurrentId = await getUserId()
         const currentUser = await getProfile(getCurrentId)
-        this.setState( { user: res.data, currentUser : currentUser.data  }) 
         this.getData()
-       } catch (err) {
+        this.setState( { currentUser : currentUser.data  })
+        } catch (err) {
           console.log(err)
         }
       }
   }
-}
-
-getData = async () => {
-  const userId = this.props.match.params.userId
-  const res = await getProfile(userId)
-  this.setState( { user: res.data }) 
 }
 
 addLike = async (userId, postId) => {
@@ -64,7 +60,7 @@ addLike = async (userId, postId) => {
   // const userId = this.props.match.params.userId
   await getLike(userId, postId)
   const res = await getProfile(userId)
-  this.setState({  user: res.data  })   
+  this.setState({  user: res.data  })
 }
 
 handleChange = event => {
@@ -76,13 +72,12 @@ handleChange = event => {
 postComment = async ( postOwner, postId) =>{
   const contents = this.state.data
   await postAComment(postOwner,postId, contents)
-  const userId = this.props.match.params.userId
-  const res = await getProfile(userId)
-  this.setState( { data: {content: ''} , user: res.data })  
+  this.getData()
+  this.setState( { data: {content: ''} })
 }
 
-commentDelete = async (postId, commentId) => {
-  const userId = getUserId()
+commentDelete = async (postId, userId, commentId) => {
+  // const userId = getUserId()
   commentADelete( userId ,postId,commentId)
   await this.getData() 
 }
@@ -96,19 +91,19 @@ deletePost = async (postId) => {
 setIndex = async (i) => {
   this.setState({index: i})
 }
+
 movePage = async (follower) => {
   this.props.history.push(`/profile/${follower.id}`)
   const data = await getProfile(follower.id)
   const user = data.data
-  await this.setState({ user })
+  this.setState({ user })
 }
 
 profileEditted = async() => {
-  const userId = this.props.match.params.userId
-  const res = await getProfile(userId)
+  this.getData()
   const getCurrentId = await getUserId()
   const currentUser = await getProfile(getCurrentId)
-  this.setState( { user: res.data, currentUser : currentUser.data  }) 
+  this.setState( { currentUser : currentUser.data  }) 
 }
 
 render(){

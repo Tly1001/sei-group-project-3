@@ -1,7 +1,5 @@
 const axios = require('axios')
-// const httpRequest = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?parameters&key=AIzaSyAmR3drNq7VbhNZTH1e0esR4oTQZrIIoMI&radius=5000&location=51.5055,0.0754&language=en&keyword=swimming&fields=formatted_address,name'
-// const apiKey = 'AIzaSyBoze6uLA1t1ok4V5CmHGknNK2eYCpcv7w'
-const apiKey = 'AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A'
+const apiKey = process.env.REACT_APP_GOOGLE_API_KEY
 
 
 // -----------------------  GET REQUEST FROM FRONT END ('/locations') ------------------------
@@ -58,7 +56,7 @@ async function getLocalFacilityData(req, res, next) {
 
 ///---------get the coordinates ( lat and lon ) from the postcode search input ( /locations) -------------
 async function getCoOrdinates(req, res) {
-  console.log('got ya boi')
+  // console.log('got ya boi')
   const googleGeoURL = 'https://maps.googleapis.com/maps/api/geocode/json?'
   const address = req.body.address
   try {
