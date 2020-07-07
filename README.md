@@ -46,15 +46,70 @@ We wanted to build a facebook clone aimed towards gyms and workout related group
 
 ## Walk-Through
 
-### Hero Page
+### Home
 
-home
 <img src="https://imgur.com/BMhbtQH.jpg">
-search
+
+### User page
+
+<img src="https://imgur.com/0uHLD3X.jpg">
+
+### Name search
+
 <img src="https://imgur.com/ojCVGoV.jpg">
-map
+
+### Map
+
 <img src="https://imgur.com/VVPRawv.jpg">
-map modal
+
+### Map modal
+
 <img src="https://imgur.com/4R89ILX.jpg">
-gym info
+
+### Gym info
+
 <img src="https://imgur.com/2zQDUXA.jpg">
+
+### Messaging
+
+<img src="https://imgur.com/zy8rm4b.jpg">
+
+---
+
+## Wireframe
+
+<a href="https://www.figma.com/file/Y1gbyc00bHPZqZpkZwb8Jd/Dinder?node-id=0%3A1">Figma link<a/>
+  
+Before we started I created the overall wireframe for the pages built in ***Figma***. For this project I wanted to give a clear outline of what the end product would be, so that the instructors would have a thorough grasp of what we were trying to achieve and to save time when it came to the styling phase.
+
+<img src="https://imgur.com/GrRozzi.jpg">
+
+## Process
+
+---
+
+## Featured code
+
+## Wins and Blockers
+
+One of the challenges we faced was with promises from the backend. There were a lot async issues where pages would break due to information not being fetched in time. We managed to fix these but at the cost of a lot of time researching.
+
+A big win personally was managing to impliment the messaging. I took it upon myself to build both the frontend and backend for it, however due to the constraints of how the backend was built from another team member I was unable to show names for the friends list to message.
+
+---
+
+## Future Features
+
+* Functioning image upload
+* Friend sidebar shows names
+* Message deleting does so to both users(only works for current user so far)
+
+---
+
+## Key Lessons Learnt
+
+Understanding how React works with props and a little bit of foresight knowing what to expect, and whether to put the state in the parent component saved a lot of time in the long run. However, some components were not built this way and took some refactoring to impliment additional features, this was a team communication issue which I will bear in mind for in the future.
+
+
+
+
