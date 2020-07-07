@@ -45,3 +45,16 @@ We wanted to build a facebook clone aimed towards gyms and workout related group
 ---
 
 ## Walk-Through
+
+### Hero Page
+
+home
+<img src="https://imgur.com/BMhbtQH.jpg">
+search
+<img src="https://imgur.com/ojCVGoV.jpg">
+map
+<img src="https://imgur.com/VVPRawv.jpg">
+map modal
+<img src="https://imgur.com/4R89ILX.jpg">
+gym info
+<img src="https://imgur.com/2zQDUXA.jpg">
