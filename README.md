@@ -36,6 +36,10 @@ We wanted to build a facebook clone aimed towards gyms and workout related group
 * JavaScript
 * React.JS
 * React-router-dom
+* MongoDB
+* Express
+* Mongoose
+* Node.JS
 * Axios
 * Bulma
 * Insomnia
