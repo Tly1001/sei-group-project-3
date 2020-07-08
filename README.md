@@ -380,9 +380,13 @@ A big win personally was managing to impliment the messaging. I took it upon mys
 
 ## Bugs
 
-* Home page does not update when posts are made.
-* Friends sidebar does not show names.
-* Message deleting only deletes for user and not recipent.
+**Friends sidebar does not show names.**
+
+The limitation here was with the architecture of the user schema. In hindsight I would have brought up messaging requirements in the initial planning process.
+
+**Message deleting only deletes for user and not recipent.**
+
+My issue with this was the logic of the messages itself. I created a property in the user schema for messages, when a message is sent a message is then saved into both users. The difficulty was finding the exact message in the other users message array.
 
 ---
 
