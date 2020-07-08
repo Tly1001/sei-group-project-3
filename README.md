@@ -85,15 +85,22 @@ We had a team standup every morning to update our progress every morning, what w
 
 ## Timeline breakdown
 
-**Highlighted:** What I personally did.
+**Highlighted:** My personal contribution.
 
 **Day 1:** Completed **wireframe design**, and mapped out schemas.
+
 **Day 2:** Created frontend and backend for **login**, **registration**, navbar, and profile pages.
+
 **Day 3:** Completed Schema for users in the backend, **location search** and information page in frontend.
+
 **Day 4:** Added **seeds**, **posting**, and post viewing functionality.
+
 **Day 5:** Completed comment and likes to posts, gym information pages, **group creation**, and following.
+
 **Day 6:** Implimented **Messaging**, home page, search bar. 
+
 **Day 7:** **Bug fixes**.
+
 **Day 8:** **Final bug fixes** and **styling**.
 
 ---
