@@ -21,6 +21,10 @@ Brief:
 
 We wanted to build a facebook clone aimed towards gyms and workout related groups.
 
+## Communication
+
+We had a team standup every morning to update our progress every morning, what we were planning to do next, as well as express any blockers we were experiencing. We also stayed in contact with each other throughout the day for advice.
+
 ## Functionality
 
 * Register and login.
@@ -77,6 +81,20 @@ We wanted to build a facebook clone aimed towards gyms and workout related group
 ### Messaging
 
 <img src="https://imgur.com/zy8rm4b.jpg">
+---
+
+## Timeline breakdown
+
+**Highlighted:** What I personally did.
+
+**Day 1:** Completed **wireframe design**, and mapped out schemas.
+**Day 2:** Created frontend and backend for **login**, **registration**, navbar, and profile pages.
+**Day 3:** Completed Schema for users in the backend, **location search** and information page in frontend.
+**Day 4:** Added **seeds**, **posting**, and post viewing functionality.
+**Day 5:** Completed comment and likes to posts, gym information pages, **group creation**, and following.
+**Day 6:** Implimented **Messaging**, home page, search bar. 
+**Day 7:** **Bug fixes**.
+**Day 8:** **Final bug fixes** and **styling**.
 
 ---
 
@@ -91,6 +109,126 @@ Before we started I created the overall wireframe for the pages built in ***Figm
 ---
 
 ## Featured code
+
+### Locations
+
+I initially implimented the Mapbox API consumption, later on one of my team mates tried implimenting geolocation based on user searches but had issues with mapbox itself. I helped to remedy the issue by moving the mapbox location variables into the parent component.
+
+```
+<MapGl
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+          mapStyle='mapbox://styles/mapbox/light-v10'
+          {...this.props.viewport}
+          onViewportChange={this.props.moveMap}
+        >
+          {this.props.data.map((location) => {
+            return <Marker
+              key={location.place_id}
+              latitude={location.lat}
+              longitude={location.lng}>
+              <span role="img"
+                aria-label="marker"
+                onClick={() =>this.handleModal(location.place_id)}
+              > 🏋️</span>
+            </Marker>
+          })}
+        </MapGl>
+```
+
+```
+class gymLocations extends React.Component {
+  state= {
+    searchForm: {
+      keyword: '', 
+      radius: '', 
+      longitude: '', 
+      latitude: '',
+      address: ''
+    },
+    data: [],
+    viewport: {
+      latitude: 51.509865,
+      longitude: -0.118092,
+      width: '84.5vw',
+      height: '82.5vh',
+      zoom: 12
+    }, 
+    user: {},
+    modal: false
+  }
+
+  handleChange = event => {
+    const searchForm = { ...this.state.searchForm, [event.target.name]: event.target.value }
+    this.setState({ searchForm })
+  }
+
+  async handleGeocoding() {
+    const res = await axios.post('/api/locations/co' , { ...this.state.searchForm })
+    const searchForm = { ...this.state.searchForm, latitude: res.data.lat, longitude: res.data.lng }
+    const viewport = { ...this.state.viewport, latitude: res.data.lat, longitude: res.data.lng }
+    this.setState({ searchForm, viewport })
+  }
+
+  handleSubmit = async event => {
+    event.preventDefault()
+    try {
+      await this.handleGeocoding()
+      const response = await axios.post('/api/locations', { ...this.state.searchForm }) 
+      this.setState({ data: response.data })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  moveMap = (viewport) => {
+    this.setState({ viewport })
+  }
+
+  setModal =() => {
+    this.setState({ modal: true })
+  }
+  hideModal = () => {
+    this.setState({ modal: false })
+  }
+
+  render(){
+    return (
+
+      <>
+        <div className="locations">
+          <div className="search">
+            <GymSearch
+              change={this.handleChange} 
+              submit={this.handleSubmit}
+              {...this.state.searchForm}
+              flyTo={this.handleFlyTo}
+            />
+          </div>
+          <div className="map">
+            <Map
+              moveMap={this.moveMap}
+              viewport={this.state.viewport}
+              data={this.state.data}
+            />
+          </div>
+        </div>
+        <div className="sidebar">
+          <ProfileSidebar 
+            modal={this.state.modal}
+            setModal={this.setModal}
+            hideModal={this.hideModal}
+            user={this.state.user.id}/>
+        </div>
+        
+      </>
+    )
+  }
+}
+
+export default gymLocations
+```
+
+### Messaging
 
 My most proud moment was completing the messaging system, there was a lot of trial and error since it was the first time I had to plan and write both frontend and backend relationships. I found it very interesting deciding how much work should be done in the frontend and backend, and what logic to impliment and learned a lot from this.
 
@@ -233,11 +371,19 @@ A big win personally was managing to impliment the messaging. I took it upon mys
 
 ---
 
+## Bugs
+
+* Home page does not update when posts are made.
+* Friends sidebar does not show names.
+* Message deleting only deletes for user and not recipent.
+
+---
+
 ## Future Features
 
-* Functioning image upload
-* Friend sidebar shows names
-* Message deleting does so to both users(only works for current user so far)
+* Functioning image upload.
+* Add additional emojis for likes.
+* Settings page.
 
 ---
 
