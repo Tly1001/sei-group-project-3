@@ -1,6 +1,6 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) General Assembly Project #3: spot.me (group project)
 
-<a href="https://dinder-for-recipes.netlify.app/">Deployed Link<a/>
+<a href="http://spot-me-group.herokuapp.com/register">Deployed Link<a/>
 
 The third project is to **build a full-stack application** using **Mongoose, Express, React.JS and Node.JS**.
 
